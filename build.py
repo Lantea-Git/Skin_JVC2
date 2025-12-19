@@ -15,15 +15,18 @@ print(f"Using master: {MASTER_FILE}")
 parts = {}
 current_part = None
 buffer = []
-version = None
 author = None
+versions = {}
 
 with open(MASTER_FILE, encoding="utf-8") as f:
     for line in f:
         stripped = line.strip()
 
-        if stripped.startswith("/* Version:"):
-            version = stripped.replace("/* Version:", "").replace("*/", "").strip()
+        if stripped.startswith("/* VERSION [["):
+            name = stripped.split("[[")[1].split("]]")[0]
+            value_bump = stripped.split(":")[1].replace("*/", "").strip()
+            versions[name] = value_bump
+
         elif stripped.startswith("/* Author:"):
             author = stripped.replace("/* Author:", "").replace("*/", "").strip()
 
@@ -40,8 +43,6 @@ with open(MASTER_FILE, encoding="utf-8") as f:
         elif current_part:
             buffer.append(line)
 
-if not version:
-    raise RuntimeError("VERSION not found in master")
 if not author:
     raise RuntimeError("AUTHOR not found in master")
 
@@ -69,7 +70,9 @@ for template in templates:
             output.append(line)
 
     content = "".join(output)
-    content = content.replace("{{MASTER_VERSION}}", version)
+    for name, value in versions.items():
+        version_obj = "{{VERSION_" + name + "}}"
+        content = content.replace(version_obj, value)
     content = content.replace("{{MASTER_AUTHOR}}", author)
 
     out_name = template.replace(".template.js", ".js")
