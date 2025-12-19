@@ -1,7 +1,12 @@
 /* Master */
 
-/* Version: 7.2.4 */
+/* VERSION [[Clean_Pub_Risi_JVC_CSS]]: 7.2.4 */
+/* VERSION [[No_Round_JVC_CSS]]      : 7.2.5 */
+
+
+
 /* Author: Atlantis */
+
 
 /* PART START: [[Clean_Pub_Risi_JVC_CSS]] */
 
@@ -10,8 +15,7 @@
 
     /* masque icone discord + le layout fav */
     /* .tabs.btn-group > a[href*="risibank.fr"], */
-    .card-body ~ .favorite-heart,
-    .card-body ~ .bookmark,
+    .media-preview .card-body ~ *,
     .fa-discord {
         display: none !important;
     }
