@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Clean_Pub_Risi_JVC
 // @namespace    Clean_Pub_Risi_JVC
-// @version      {{MASTER_VERSION}}
+// @version      {{VERSION_Clean_Pub_Risi_JVC_CSS}}
 // @description  Vire les onglets secondaires dans risibank.
 // @author       {{MASTER_AUTHOR}}
 // @match        *://risibank.fr/embed*
